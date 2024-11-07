@@ -10,6 +10,7 @@ import FindPostController from './controllers/postagem/FindController';
 import CreateComentController from './controllers/comentario/CreateComentController';
 
 import LisComentController from './controllers/comentario/ListComentController';
+import LoginUserController from './controllers/usuario/login';
 
 const router = express.Router();
 
@@ -54,6 +55,10 @@ router.post('/comentario', async(req:Request, res:Response)=>{
 });
 router.get('/comentario', async(req:Request, res:Response)=>{
     return new LisComentController(). handle(req, res);
+});
+
+router.post('/login', async (req: Request, res: Response) => {
+    return new LoginUserController(). handle(req, res);
 });
 
 export default router;
