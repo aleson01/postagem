@@ -11,6 +11,7 @@ import CreateComentController from './controllers/comentario/CreateComentControl
 
 import LisComentController from './controllers/comentario/ListComentController';
 import LoginUserController from './controllers/usuario/login';
+import { authMiddleware } from './middleware/authMiddleware';
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get('/teste', async (req: Request, res: Response) => {
 router.post('/usuario', async(req:Request, res:Response)=>{
     return new CreateUserController(). handle(req, res);
 });
-router.get('/usuario', async(req:Request, res:Response)=>{
+router.get('/usuario', authMiddleware, async(req:Request, res:Response)=>{
     return new ListUserController(). handle(req, res);
 });
 
