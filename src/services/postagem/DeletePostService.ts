@@ -2,10 +2,11 @@ import prismaClient from "../../prisma";
 
 interface DeletePostProps{
     id: string;
+    userId: string;
 }
 
 class DeletePostService{
-    async execute({id}:DeletePostProps){
+    async execute({id, userId}:DeletePostProps){
         if(!id){
             throw new Error("Solicitação Invalida.")
         }
@@ -19,12 +20,16 @@ class DeletePostService{
         if(!find){
             throw new Error("Postagem não existe.")
         }
-        await prismaClient.postagem.delete({
-            where:{
-                id:find.id,
-            }
-        })
-        return ("Deletado com Sucesso")
+
+        if(find.userId === userId){
+            await prismaClient.postagem.delete({
+                where:{
+                    id:find.id,
+                }
+            })
+            return ("Deletado com Sucesso")
+        }
+        
     }
 }
 
