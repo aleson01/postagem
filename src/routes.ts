@@ -20,7 +20,7 @@ router.get('/teste', async (req: Request, res: Response) => {
 });
 //router.post('/users', new CreateUserController().handle)
 
-router.post('/usuario', async(req:Request, res:Response)=>{
+router.post('/usuario', authMiddleware, async(req:Request, res:Response)=>{
     return new CreateUserController(). handle(req, res);
 });
 router.get('/usuario', authMiddleware, async(req:Request, res:Response)=>{
