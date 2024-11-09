@@ -23,13 +23,13 @@ router.get('/teste', async (req: Request, res: Response) => {
 router.post('/usuario', authMiddleware, async(req:Request, res:Response)=>{
     return new CreateUserController(). handle(req, res);
 });
-router.get('/usuario', authMiddleware, async(req:Request, res:Response)=>{
+router.get('/usuario', async(req:Request, res:Response)=>{
     return new ListUserController(). handle(req, res);
 });
 
 // ROTAS POSTAGEM
 
-router.post('/postagem', async(req:Request, res:Response)=>{
+router.post('/postagem', authMiddleware, async(req:Request, res:Response)=>{
     return new CreatePostController(). handle(req, res);
 });
 
@@ -37,11 +37,11 @@ router.get('/postagem', async(req:Request, res:Response)=>{
     return new ListPostController(). handle(req, res);
 });
 
-router.delete('/postagem', async(req:Request, res:Response)=>{
+router.delete('/postagem', authMiddleware, async(req:Request, res:Response)=>{
     return new DeletePostController() .handle(req,res);
 });
 
-router.put('/postagem', async(req:Request, res:Response)=>{
+router.put('/postagem', authMiddleware, async(req:Request, res:Response)=>{
     return new EditPostController() .handle(req,res);
 });
 
@@ -51,7 +51,7 @@ router.get('/postagem/id', async(req:Request, res:Response)=>{
 
 // ROTAS COMENTARIOS
 
-router.post('/comentario', async(req:Request, res:Response)=>{
+router.post('/comentario', authMiddleware, async(req:Request, res:Response)=>{
     return new CreateComentController(). handle(req, res);
 });
 router.get('/comentario', async(req:Request, res:Response)=>{
